@@ -60,6 +60,8 @@ cover/
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+# 忽略所有以 .log 结尾的文件，包括任意目录层级中的
+**/*.log
 
 # Flask stuff:
 instance/
@@ -160,3 +162,7 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
+
+# 自定义目录
+
+output/
