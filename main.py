@@ -2,7 +2,7 @@
 @copyright ziqi-jin
 '''
 
-from interfaces.model_interface import ModelInterface
+from interfaces.model_interface import TheBAIModelRequest
 from interfaces.execution_interface import ExecutionInterface
 from log.logger import Logger
 from code_generator import CodeGenerator
@@ -10,7 +10,8 @@ from test_case_generator import TestCaseGenerator
 
 def main():
     base_directory = './output'
-    model_interface = ModelInterface()
+    api_key = input("please input your api key for TheB.AI: ")
+    model_interface = TheBAIModelRequest(api_key=api_key)
     logger = Logger()
     execution_interface = ExecutionInterface(base_directory)
     code_generator = CodeGenerator(model_interface)
@@ -39,7 +40,6 @@ def main():
         # 执行测试用例
         test_result = execution_interface.execute_code(test_code, 'example_directory', 'test_generated_code.py')
         logger.log_execution(f"Test execution result: {test_result}")
-
 if __name__ == "__main__":
     main()
 

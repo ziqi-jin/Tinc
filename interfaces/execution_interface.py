@@ -3,6 +3,7 @@
 '''
 
 import os
+import subprocess
 
 class ExecutionInterface:
     def __init__(self, base_directory):
@@ -18,15 +19,22 @@ class ExecutionInterface:
             os.makedirs(target_directory)
 
         file_path = os.path.join(target_directory, filename)
-        with open(file_path, 'w') as file:
+        with open(file_path, 'w', encoding='utf-8') as file:
             file.write(code)
         
-        if self.request_permission():
-            print(f"Executing code in {target_directory}")
+        print(f"Code has been written to {file_path}")
+        
+        allow_execution = True
+        # 在这里，你可以实现更复杂的权限检查逻辑
+        # 例如，根据代码内容决定是否需要权限
+        allow_execution = self.request_permission()
+
+        if allow_execution:
+            print(f"Executing code: {file_path}")
             try:
-                exec(open(file_path).read())
-                return "Execution completed."
-            except Exception as e:
-                return f"Execution failed: {str(e)}"
+                result = subprocess.run(['python', file_path], capture_output=True, text=True, check=True)
+                return f"Execution completed.\nOutput:\n{result.stdout}"
+            except subprocess.CalledProcessError as e:
+                return f"Execution failed.\nError:\n{e.stderr}"
         else:
             return "Execution denied by user."

@@ -8,4 +8,6 @@ class CodeGenerator:
         self.model_interface = model_interface
 
     def generate_code(self, prompt):
-        return self.model_interface.get_decision(prompt)
+        code = self.model_interface.make_request(prompt)
+        self.model_interface.add_message_to_history(code, role="assistant")
+        return code
