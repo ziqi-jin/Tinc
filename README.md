@@ -10,7 +10,7 @@ Welcome to your suggestions through issues.
 # Simple Example
 
 ```shell
-(py311) (base) xx@zhuyudeMacBook-Air Tinc % python main.py
+(py311) (base) xx@xxxMacBook-Air Tinc % python main.py
 
 please input your api key for TheB.AI: xxxxxx
 Enter your design prompt (type 'exit' to quit): numpy矩阵乘法
